@@ -87,6 +87,15 @@ body {
   color: white;
 }
 
+.btn-secondary {
+  background-color: #4cc9f0;
+  color: white;
+}
+
+.btn-secondary:hover {
+  background-color: #3a86ff;
+}
+
 .timer-card {
   background-color: white;
   padding: 1rem;
@@ -166,5 +175,19 @@ body {
   padding: 0.5rem;
   margin: 1rem 0;
   background-color: rgba(247, 37, 133, 0.1);
+  border-radius: 4px;
+}
+
+.refresh-container {
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0;
+}
+
+.success-message {
+  color: var(--success-color);
+  padding: 0.5rem;
+  margin: 1rem 0;
+  background-color: rgba(76, 201, 240, 0.1);
   border-radius: 4px;
 } 
