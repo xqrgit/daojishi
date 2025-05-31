@@ -1,0 +1,22 @@
+{
+  "name": "daojishi",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "next": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "@vercel/blob": "^0.16.0",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "eslint": "latest",
+    "eslint-config-next": "latest"
+  }
+} 
