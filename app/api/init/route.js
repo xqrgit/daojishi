@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { initTimersStorage } from '../utils/blob';
+import { initStorage } from '../utils/blob';
 
 /**
  * @description 初始化Blob存储的API路由
@@ -7,12 +7,12 @@ import { initTimersStorage } from '../utils/blob';
  */
 export async function POST() {
   try {
-    await initTimersStorage();
-    return NextResponse.json({ success: true, message: 'Blob存储已初始化' });
+    const result = await initStorage();
+    return NextResponse.json(result);
   } catch (error) {
-    console.error('初始化Blob存储失败:', error);
+    console.error('初始化存储API错误:', error);
     return NextResponse.json(
-      { error: '初始化Blob存储时发生错误' },
+      { success: false, error: error.message }, 
       { status: 500 }
     );
   }
