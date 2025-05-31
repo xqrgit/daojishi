@@ -7,7 +7,25 @@ import { getTimers } from '../utils/blob';
  */
 export async function GET() {
   try {
-    const timers = await getTimers();
+    console.log('收到获取定时器列表请求');
+    
+    // 确保获取最新数据
+    let retries = 3;
+    let timers = [];
+    
+    while (retries > 0) {
+      try {
+        timers = await getTimers();
+        break;
+      } catch (error) {
+        console.error(`获取定时器失败，剩余重试次数: ${retries - 1}`, error);
+        retries--;
+        if (retries === 0) throw error;
+        await new Promise(resolve => setTimeout(resolve, 500)); // 延迟500ms重试
+      }
+    }
+    
+    console.log(`成功获取${timers.length}个定时器数据`);
     return NextResponse.json(timers);
   } catch (error) {
     console.error('获取定时器失败:', error);

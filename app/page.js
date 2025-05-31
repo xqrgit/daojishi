@@ -11,8 +11,7 @@ export default function Home() {
   const [timers, setTimers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  const [lastUpdate, setLastUpdate] = useState(Date.now()); // 添加更新时间戳
-
+  
   // 初始化Blob存储
   const initBlobStorage = async () => {
     try {
@@ -57,32 +56,30 @@ export default function Home() {
     }
   };
 
-  // 初次加载数据和更新时重新加载
+  // 初次加载数据
   useEffect(() => {
     loadTimers();
-  }, [lastUpdate]);
+  }, []);
 
   // 处理添加定时器
   const handleTimerAdded = (newTimer) => {
+    // 仅更新UI状态，不触发重新加载
     setTimers(prevTimers => [...prevTimers, newTimer]);
-    // 更新时间戳，触发数据重新加载
-    setTimeout(() => setLastUpdate(Date.now()), 500);
   };
 
   // 处理重置定时器
   const handleTimerReset = (updatedTimer) => {
+    // 仅更新UI状态，不触发重新加载
     setTimers(prevTimers => 
       prevTimers.map(timer => 
         timer.id === updatedTimer.id ? updatedTimer : timer
       )
     );
-    // 更新时间戳，触发数据重新加载
-    setTimeout(() => setLastUpdate(Date.now()), 500);
   };
 
   // 手动刷新数据
   const handleRefresh = () => {
-    setLastUpdate(Date.now());
+    loadTimers();
   };
 
   return (
