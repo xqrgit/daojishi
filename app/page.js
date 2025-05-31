@@ -12,10 +12,22 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
+  // 初始化Blob存储
+  const initBlobStorage = async () => {
+    try {
+      await fetch('/api/init', { method: 'POST' });
+    } catch (err) {
+      console.error('初始化存储失败:', err);
+    }
+  };
+
   // 加载定时器数据
   const loadTimers = async () => {
     try {
       setLoading(true);
+      // 先尝试初始化Blob存储
+      await initBlobStorage();
+      
       const response = await fetch('/api/timers');
       
       if (!response.ok) {

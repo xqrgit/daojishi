@@ -52,7 +52,7 @@ export async function putTimers(data, previousHash = null) {
  */
 export async function initTimersStorage() {
   try {
-    const { blobs } = await list();
+    const { blobs } = await list({ prefix: '' });
     const exists = blobs.some(blob => blob.pathname === FILE);
     
     if (!exists) {
