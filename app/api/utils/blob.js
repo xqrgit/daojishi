@@ -8,7 +8,7 @@ const FILE = 'timers.json';
  */
 export async function getTimers() {
   try {
-    const { url } = await get(FILE);
+    const { url } = await get({ pathname: FILE });
     const response = await fetch(url);
     if (!response.ok) {
       return [];
@@ -34,6 +34,7 @@ export async function putTimers(data, previousHash = null) {
     }
     
     const result = await put(FILE, JSON.stringify(data), {
+      access: 'public',
       addRandomSuffix: false,
       previousHash // 防止并发冲突
     });
